@@ -1,3 +1,5 @@
 venv/
+fast_api/model_weights/
+fast_api/fast-api-venv/
 *.h5
 saved_model/my_model/variables/
