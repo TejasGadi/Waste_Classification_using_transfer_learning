@@ -1,0 +1,51 @@
+
+{% extends "layout.html" %}
+   
+{% block content %}
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <h2 class="text-center mb-4">Contact Us</h2>
+                <form  id="login-form" name="login" action="" method="post" novalidate>
+                    {{ form.hidden_tag() }}
+                <div class="form-group">
+                    <label for="email"> {{ form.email.label }}</label>
+                    {{ form.email(size=88) }}
+                        {% for error in form.email.errors %}
+                            <span class="error-message">{{ error }}</span>
+                        {% endfor %}
+                </div>
+                <div class="form-group">
+                    <label for="password"> {{ form.first.label }}</label>
+                    {{ form.first(size=88)}}
+                        {% for error in form.first.errors %}
+                            <span class="error-message">{{ error }}</span>
+                        {% endfor %}
+                </div>
+                <div class="form-group">
+                    <label for="password">{{ form.subject.label }}</label>
+                    {{ form.subject(size=88) }}
+                    {% for error in form.subject.errors %}
+                     <span class="error-message">{{ error }}</span>
+                    {% endfor %}
+                </div>
+                <div class="form-group">
+                    <label for="email"> {{form.message.label }}</label>
+                    {{ form.message(size=88) }}
+                    {% for error in form.message.errors %}
+                    <span class="error-message">{{ error }}</span>
+                   {% endfor %}
+                </div>  
+          
+                <div class="form-group">
+                    <button type="submit" class="btn btn-success btn-block">Send</button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+<br>
+{% endblock %}

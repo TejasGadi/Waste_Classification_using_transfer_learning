@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Waste Identification System</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css')}}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <!-- Bootstrap JS and Popper.js scripts (required for Bootstrap components) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.8/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- Font Awesome script -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js"></script>
+   <style>
+ 
+        .flash-message {
+            margin-bottom: 10px;
+            opacity: 1;
+            transition: opacity 1s ease-in-out;
+        }
+        .close-button {
+            cursor: pointer;
+        }
+    
+    </style>
+<script>
+    // Function to remove a specific flashed message when the close button is clicked
+    function removeFlashedMessage(messageId) {
+        var flashedMessage = document.getElementById(messageId);
+        if (flashedMessage) {
+            flashedMessage.style.opacity = 0;
+            setTimeout(function() {
+                flashedMessage.remove();
+            }, 1000); // Remove after fade-out transition (adjust as needed)
+        }
+    }
+
+    // Function to remove all flashed messages after a timeout
+    function removeFlashedMessages() {
+        var flashedMessages = document.querySelectorAll('.flash-message');
+        flashedMessages.forEach(function(message) {
+            message.style.opacity = 0;
+            setTimeout(function() {
+                message.remove();
+            }, 1000); // Remove after fade-out transition (adjust as needed)
+        });
+    }
+
+    // Automatically remove flashed messages after a timeout (adjust the timeout value as needed)
+    setTimeout(removeFlashedMessages, 2000); // Remove after 5 seconds
+</script>
+</head>
+<body>
+   
+
+<!-- <div class="container">  -->
+
+    {% include "includes/nav.html" %}
+
+        <div id="flashed-messages">
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <div id="message_{{ loop.index }}" class="alert alert-{{category}} flash-message">
+                            <span>{{ message }}</span>
+                            <button type="button" class="close close-button" aria-label="Close" onclick="removeFlashedMessage('message_{{ loop.index }}')">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+     
+        <!-- Your other HTML content goes here -->
+    </div>
+
+    
+    {% block content %}
+    {% endblock %}
+
+ 
+
+<!-- Bootstrap JS and dependencies -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+<!-- </div> -->
+    {% include "includes/footer.html" %}
+</body>
+</html>    

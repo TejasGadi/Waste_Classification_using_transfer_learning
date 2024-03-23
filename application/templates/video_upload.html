@@ -1,0 +1,72 @@
+{% extends "layout.html" %}
+
+{% block content %}
+ <!-- Custom script for video preview -->
+ <script>
+    document.getElementById('videoFile').addEventListener('change', function (e) {
+        const videoPreview = document.getElementById('video-preview');
+        videoPreview.innerHTML = '';
+
+        const file = e.target.files[0];
+        const video = document.createElement('video');
+        video.src = URL.createObjectURL(file);
+        video.controls = true;
+        video.style.width = '100%';
+        videoPreview.appendChild(video);
+    });
+</script>
+<br><br>
+<section class = "row" >
+    <div class = "rotate">
+    <div id="carousel">
+    <div ><img src="{{ url_for('static', filename='images/carousel.png')}}" class="d-block" alt="Image 1"></div>
+    <div ><img src="{{ url_for('static', filename='images/carousel1.png')}}" class="d-block" alt="Image 1"></div>
+    <div ><img src="{{ url_for('static', filename='images/carousel2.png')}}" class="d-block" alt="Image 1"></div>
+    <div ><img src="{{ url_for('static', filename='images/carousel3.png')}}" class="d-block" alt="Image 1"></div>
+    <div ><img src="{{ url_for('static', filename='images/carousel4.png')}}" class="d-block" alt="Image 1"></div>
+    <div ><img src="{{ url_for('static', filename='images/carousel5.png')}}" class="d-block" alt="Image 1"></div>
+    <div ><img src="{{ url_for('static', filename='images/carousel6.png')}}" class="d-block" alt="Image 1"></div>
+    <div ><img src="{{ url_for('static', filename='images/carousel7.png')}}" class="d-block" alt="Image 1"></div>
+    <div ><img src="{{ url_for('static', filename='images/carousel8.png')}}" class="d-block" alt="Image 1"></div>
+</div>
+
+</div>
+
+</section>
+<section id="image-upload" class="py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 offset-md-2">
+                <h2 class="text-center">Video Upload</h2>
+                <div class="card">
+                    <div class="card-body">
+                        <form action="#" method="post" enctype="multipart/form-data">
+                            <div class="form-group">
+                                <label for="videoFile" class="col-form-label">Choose Video:</label>
+                                <div class="upload-btn-wrapper">
+                                    <button class="btn">Browse</button>
+                                    <input type="file" name="videoFile" id="videoFile" accept="video/*" required>
+                                </div>
+                                <small class="form-text text-muted">Accepted formats: MP4, AVI, MKV, etc.</small>
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-success btn-block">Upload Video</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div id="video-preview" class="mt-4">
+                    <!-- Video preview will be displayed here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+{% endblock %}
+ 
+        
+
+
+    

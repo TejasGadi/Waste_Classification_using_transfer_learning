@@ -1,0 +1,52 @@
+
+<header>
+    <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark border">
+        <div class="container">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-content" aria-controls="navbar-content" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbar-content">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link {% if index %}active{% endif %}" href="{{ url_for('index') }}">Home</a>
+                    </li>
+                    {% if session['username'] %}
+                    <li class="nav-item">
+                        <a class="nav-link {% if image_upload %}active{% endif %}" href="{{ url_for('image_upload') }}">Image Upload</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if video_upload %}active{% endif %}" href="{{ url_for('video_upload') }}">Video Upload</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if live_camera %}active{% endif %}" href="{{ url_for('live_camera') }}">Live Camera</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if contact_us %}active{% endif %}" href="{{ url_for('contact_us') }}">Contact Us</a>
+                    </li>
+                    {% endif %}
+                    <li class="nav-item">
+                        <a class="nav-link {% if about_us %}active{% endif %}" href="{{ url_for('about_us') }}">About Us</a>
+                    </li>
+                    {% if not session['username'] %}
+                    <li class="nav-item"><a href="{{ url_for('login') }}" class="nav-link {% if login %}active{% endif %}">Login</a></li>
+                    {% else %}
+                    <li class="nav-item"><a href="{{ url_for('logout') }}" class="nav-link">Logout</a></li>
+                    {% endif %}
+                    {% if not session['username'] %}
+                    <li class="nav-item"><a href="{{ url_for('register') }}" class="nav-link {% if register %}active{% endif %}">Register</a></li>   
+                    {% endif %}
+                    <li class="nav-item"> {% if session['username'] %}
+                        <a class="navbar-brand" >
+                            <span class="user-icon">
+                                <i class="fas fa-user"> </i> {{session['username']}} <!-- Font Awesome user icon -->
+                            </span>
+                        
+                        </a>                  
+                    {% endif %}
+                    </li> 
+                </ul>
+            </div>
+        </div>
+    </nav>
+    
+</header>

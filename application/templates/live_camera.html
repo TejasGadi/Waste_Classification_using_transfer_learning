@@ -1,0 +1,73 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<br><br>
+<section class = "row" >
+    <div class = "rotate">
+    <div id="carousel">
+    <div ><img src="{{ url_for('static', filename='images/carousel.png')}}" class="d-block" alt="Image 1"></div>
+    <div ><img src="{{ url_for('static', filename='images/carousel1.png')}}" class="d-block" alt="Image 1"></div>
+    <div ><img src="{{ url_for('static', filename='images/carousel2.png')}}" class="d-block" alt="Image 1"></div>
+    <div ><img src="{{ url_for('static', filename='images/carousel3.png')}}" class="d-block" alt="Image 1"></div>
+    <div ><img src="{{ url_for('static', filename='images/carousel4.png')}}" class="d-block" alt="Image 1"></div>
+    <div ><img src="{{ url_for('static', filename='images/carousel5.png')}}" class="d-block" alt="Image 1"></div>
+    <div ><img src="{{ url_for('static', filename='images/carousel6.png')}}" class="d-block" alt="Image 1"></div>
+    <div ><img src="{{ url_for('static', filename='images/carousel7.png')}}" class="d-block" alt="Image 1"></div>
+    <div ><img src="{{ url_for('static', filename='images/carousel8.png')}}" class="d-block" alt="Image 1"></div>
+</div>
+
+</div>
+
+</section>
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <h2 class="text-center">Live Camera</h2>
+            <div class="card">
+                <div class="card-body">
+                    <video id="live-camera" class="embed-responsive-item" autoplay></video>
+                    <button id="capture-btn" class="btn btn-success btn-block mt-3">Capture Photo</button>
+                    <img id="captured-photo" class="mt-3" alt="Captured Photo">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Custom script for capturing photo from webcam -->
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const liveCamera = document.getElementById('live-camera');
+        const capturedPhoto = document.getElementById('captured-photo');
+        const captureBtn = document.getElementById('capture-btn');
+
+        navigator.mediaDevices.getUserMedia({ video: true })
+            .then((stream) => {
+                liveCamera.srcObject = stream;
+            })
+            .catch((error) => {
+                console.error('Error accessing webcam:', error);
+            });
+
+        captureBtn.addEventListener('click', function () {
+            // Create a canvas element to capture the photo
+            const canvas = document.createElement('canvas');
+            canvas.width = liveCamera.clientWidth;
+            canvas.height = liveCamera.clientHeight;
+            const context = canvas.getContext('2d');
+
+            // Draw the current frame of the live camera onto the canvas
+            context.drawImage(liveCamera, 0, 0, canvas.width, canvas.height);
+
+            // Set the captured photo source to the canvas data URL
+            capturedPhoto.src = canvas.toDataURL('image/jpeg');
+            capturedPhoto.style.display = 'block';
+        });
+    });
+</script>
+{% endblock %}
+ 
+        
+
+
+    
